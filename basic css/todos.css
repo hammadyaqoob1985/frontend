@@ -1,3 +1,27 @@
+/*all elements*/
+* {
+border: 1px solid lightgrey;
+}
+
+/*every anchor tag inside li descendent*/
+li a {
+color: red;
+}
+
+/*same level but beside adjacent*/
+h1 + ul {
+	border: 1px solid red;
+}
+
+/*attrubute selector*/
+a[href="http://www.facebook.com"] {
+	background: blue;
+}
+
+/*nth of type selector*/
+ul:nth-of-type(even) {
+	background: purple;
+}
 body{
 	background: orange;
 }
