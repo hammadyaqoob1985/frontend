@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import './bootstrap.min.css';
@@ -88,4 +89,22 @@ function AuthorQuiz({turnData, highlight, onAnswerSelected, onContinue}) {
   );
 }
 
-export default AuthorQuiz;
+function mapStateToProps(state) {
+  return {
+    turnData: state.turnData,
+    highlight: state.highlight
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onAnswerSelected: (answer) => {
+      dispatch({type: 'ANSWER_SELECTED', answer})
+    },
+    onContinue: () => {
+      dispatch({type: 'CONTINUE'})
+    }
+
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorQuiz);
