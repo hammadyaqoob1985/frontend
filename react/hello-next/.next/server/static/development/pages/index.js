@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -109,21 +109,71 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 const InputElement = () => {
-  return __jsx("input", {
+  const {
+    0: inputEntered,
+    1: setInputEntered
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
+  const {
+    0: inputHistory,
+    1: setInputHistory
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  return __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7
+    },
+    __self: undefined
+  }, __jsx("input", {
+    onChange: e => {
+      setInputEntered(e.target.value);
+      setInputHistory([...inputHistory, e.target.value]);
+    },
     placeholder: "Enter some text",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 4
+      lineNumber: 8
     },
     __self: undefined
-  });
+  }), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: undefined
+  }), inputEntered, __jsx("hr", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  }), __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  }), __jsx("ul", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  }, inputHistory.map(entry => {
+    return __jsx("div", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 20
+      },
+      __self: undefined
+    }, entry);
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (InputElement);
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
