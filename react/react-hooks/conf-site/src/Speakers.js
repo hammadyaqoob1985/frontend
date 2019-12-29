@@ -14,7 +14,7 @@ const Speakers = ({}) => {
   const [speakingSaturday, setSpeakingSaturday] = useState(true);
   const [speakingSunday, setSpeakingSunday] = useState(true);
   //const [speakerList, dispatch] = useReducer(speakersReducer, []);
-  //const [isLoading, setIsLoading] = useState(true);
+ // const [isLoading, setIsLoading] = useState(true);
 
   const context = useContext(ConfigContext);
 
@@ -52,7 +52,7 @@ const Speakers = ({}) => {
   };
 
   const newSpeakerList = useMemo(() =>
-    data
+  data
     .filter(
       ({ sat, sun }) => (speakingSaturday && sat) || (speakingSunday && sun)
     )
@@ -70,12 +70,7 @@ const Speakers = ({}) => {
     ? []
     : newSpeakerList;
 
-    if (hasErrored)
-    return (
-      <div>
-        {errorMessage}&nbsp;"Make sure you have launched "npm run json-server"
-      </div>
-    );
+
     
   const handleChangeSunday = () => {
     setSpeakingSunday(!speakingSunday);
@@ -91,6 +86,12 @@ const Speakers = ({}) => {
     //console.log("changing session favorte to " + favoriteValue);
   },[]);
 
+      if (hasErrored)
+    return (
+      <div>
+        {errorMessage}&nbsp;"Make sure you have launched "npm run json-server"
+      </div>
+    );
   if (isLoading) return <div>Loading...</div>;
 
   return (

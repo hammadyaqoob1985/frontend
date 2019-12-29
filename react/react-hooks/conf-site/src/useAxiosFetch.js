@@ -4,8 +4,10 @@ import axios from "axios";
 const dataFetchReducer = (state, action) => {
   switch (action.type) {
     case "FETCH_INIT":
+      console.log("FETCH_INIT");
       return { ...state, isLoading: true, isError: false };
     case "FETCH_SUCCESS":
+      console.log("FETCH_SUCCESS");
       return {
         ...state,
         isLoading: false,
@@ -14,6 +16,7 @@ const dataFetchReducer = (state, action) => {
         data: action.payload
       };
     case "FETCH_FAILURE":
+      console.log("FETCH_FAILURE");
       return {
         ...state,
         isLoading: false,
@@ -21,6 +24,7 @@ const dataFetchReducer = (state, action) => {
         errorMessage: "Data Retrieve Failure"
       };
     case "REPLACE_DATA":
+      console.log("REPLACE_DATA");
       // The record passed (state.data) must have the attribute "id"
       const newData = state.data.map(rec => {
         return rec.id === action.replacerecord.id ? action.replacerecord : rec;
@@ -38,6 +42,7 @@ const dataFetchReducer = (state, action) => {
 };
 
 const useAxiosFetch = (initialUrl, initialData) => {
+  console.log("useAxiosFetch called");
   const [url] = useState(initialUrl);
 
   const [state, dispatch] = useReducer(dataFetchReducer, {
@@ -48,18 +53,26 @@ const useAxiosFetch = (initialUrl, initialData) => {
   });
 
   useEffect(() => {
+    console.log("axios use effect called");
     let didCancel = false;
 
     const fetchData = async () => {
+      console.log("FETCH_INIT dispatched");
       dispatch({ type: "FETCH_INIT" });
+      
+      
 
       try {
+        console.log("making call to server");
         let result = await axios.get(url);
         if (!didCancel) {
+          console.log("FETCH_SUCCESS dispatched");
           dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+      
         }
       } catch (err) {
         if (!didCancel) {
+          console.log("FETCH_FAILURE dispatched");
           dispatch({ type: "FETCH_FAILURE" });
         }
       }
