@@ -7,44 +7,52 @@ import { ConfigContext } from "./App";
 import SpeakerData from "./SpeakerData";
 import SpeakerDetail from "./SpeakerDetail";
 import speakersReducer from "../src/speakersReducer"
+import useAxiosFetch from '../src/useAxiosFetch'
 
 
 const Speakers = ({}) => {
   const [speakingSaturday, setSpeakingSaturday] = useState(true);
   const [speakingSunday, setSpeakingSunday] = useState(true);
-  const [speakerList, dispatch] = useReducer(speakersReducer, []);
-  const [isLoading, setIsLoading] = useState(true);
+  //const [speakerList, dispatch] = useReducer(speakersReducer, []);
+  //const [isLoading, setIsLoading] = useState(true);
 
   const context = useContext(ConfigContext);
 
-  useEffect(() => {
-    setIsLoading(true);
-    new Promise(function(resolve) {
-      setTimeout(function() {
-        resolve();
-      }, 1000);
-    }).then(() => {
-      setIsLoading(false);
-      const speakerListServerFilter = SpeakerData.filter(({ sat, sun }) => {
-        return (speakingSaturday && sat) || (speakingSunday && sun);
-      });
-      //setSpeakerList(speakerListServerFilter);
-      dispatch({
-        type: "speakerList",
-        data: speakerListServerFilter
-      });
-    });
-    return () => {
-      console.log("cleanup");
-    };
-  }, []); // [speakingSunday, speakingSaturday]);
+  const {
+    data,
+    isLoading,
+    hasErrored,
+    errorMessage,
+    updateDataRecord
+  } = useAxiosFetch("http://localhost:4000/speakers",[]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   new Promise(function(resolve) {
+  //     setTimeout(function() {
+  //       resolve();
+  //     }, 1000);
+  //   }).then(() => {
+  //     setIsLoading(false);
+  //     const speakerListServerFilter = SpeakerData.filter(({ sat, sun }) => {
+  //       return (speakingSaturday && sat) || (speakingSunday && sun);
+  //     });
+  //     //setSpeakerList(speakerListServerFilter);
+  //     dispatch({
+  //       type: "speakerList",
+  //       data: speakerListServerFilter
+  //     });
+  //   });
+  //   return () => {
+  //     console.log("cleanup");
+  //   };
+  // }, []); // [speakingSunday, speakingSaturday]);
 
   const handleChangeSaturday = () => {
     setSpeakingSaturday(!speakingSaturday);
   };
 
   const newSpeakerList = useMemo(() =>
-    speakerList
+    data
     .filter(
       ({ sat, sun }) => (speakingSaturday && sat) || (speakingSunday && sun)
     )
@@ -56,12 +64,19 @@ const Speakers = ({}) => {
         return 1;
       }
       return 0;
-    }),[speakingSaturday, speakingSunday, speakerList]);
+    }),[speakingSaturday, speakingSunday, data]);
 
   const speakerListFiltered = isLoading
     ? []
     : newSpeakerList;
 
+    if (hasErrored)
+    return (
+      <div>
+        {errorMessage}&nbsp;"Make sure you have launched "npm run json-server"
+      </div>
+    );
+    
   const handleChangeSunday = () => {
     setSpeakingSunday(!speakingSunday);
   };
