@@ -12,7 +12,8 @@ const pageToShow = pageName => {
 
 const configValue = {
   showSignMeUp: true,
-  showSpeakerSpeakingDays: true
+  showSpeakerSpeakingDays: true,
+  loggedInUserEmail: 'hammad.yaqoob@hotmail.com'
 };
 const App = ({ pageName }) => {
   return <ConfigContext.Provider value={configValue}>
