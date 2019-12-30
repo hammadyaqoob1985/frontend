@@ -49,10 +49,10 @@
       "id": 1269,
       "firstName": "Arun",
       "lastName": "Gupta",
-      "favorite": true,
-      "bio": "Arun Gupta is a Principal Open Source Technologist at Amazon Web Services. He has built and led developer communities for 12+ years at Sun, Oracle, Red Hat and Couchbase.",
       "sat": false,
-      "sun": true
+      "sun": true,
+      "favorite": false,
+      "bio": "Arun Gupta is a Principal Open Source Technologist at Amazon Web Services. He has built and led developer communities for 12+ years at Sun, Oracle, Red Hat and Couchbase."
     },
     {
       "id": 1725,
@@ -112,10 +112,10 @@
       "id": 10808,
       "firstName": "Antony",
       "lastName": "Ross",
-      "favorite": true,
-      "bio": "Antony Ross is a consultant specializing in data science and machine learning applied to sports performance. He has worked closely with USC and UCLA and is presently involved with the Recurse Center in New York researching deep learning and voice recognition.",
       "sat": true,
-      "sun": false
+      "sun": false,
+      "favorite": true,
+      "bio": "Antony Ross is a consultant specializing in data science and machine learning applied to sports performance. He has worked closely with USC and UCLA and is presently involved with the Recurse Center in New York researching deep learning and voice recognition."
     },
     {
       "id": 6548,
